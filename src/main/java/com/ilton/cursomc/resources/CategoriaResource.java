@@ -1,3 +1,10 @@
+/*
+Nome do autor: Ilton Batista da Silva Júnior
+Data de criação do arquivo: 14/06/2019
+Objetivo sucinto do programa: Cria um servlet para testar aplicação
+Referência ao enunciado/origem do exercício: https://www.udemy.com/spring-boot-ionic
+*/
+
 package com.ilton.cursomc.resources;
 
 
@@ -18,7 +25,7 @@ public class CategoriaResource {
 	public List<Categoria> listar() {
 		
 		Categoria categoria1 = new Categoria(1,"Informatica");
-		Categoria categoria2 = new Categoria(2,"Escritoria");
+		Categoria categoria2 = new Categoria(2,"Escritorio");
 
 		List<Categoria> lista = new ArrayList<>();
 		lista.add(categoria1);

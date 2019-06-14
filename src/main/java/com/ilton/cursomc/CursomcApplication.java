@@ -1,3 +1,10 @@
+/*
+Nome do autor: Ilton Batista da Silva Júnior
+Data de criação do arquivo: 14/06/2019
+Objetivo sucinto do programa: Cria uma aplicação spring
+Referência ao enunciado/origem do exercício: https://www.udemy.com/spring-boot-ionic
+*/
+
 package com.ilton.cursomc;
 
 import org.springframework.boot.SpringApplication;

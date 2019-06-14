@@ -61,7 +61,4 @@ public class Categoria implements Serializable{
 	public String toString() {
 		return "Categoria [id=" + id + ", nome=" + nome + "]";
 	}
-	
-	
-	
 }
