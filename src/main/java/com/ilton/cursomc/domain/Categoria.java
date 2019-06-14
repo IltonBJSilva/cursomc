@@ -1,9 +1,27 @@
+/*
+Nome do autor: Ilton Batista da Silva Júnior
+Data de criação do arquivo: 14/06/2019
+Objetivo sucinto do programa: Cria uma classe de categorias
+Referência ao enunciado/origem do exercício: https://www.udemy.com/spring-boot-ionic
+*/
+
 package com.ilton.cursomc.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "CATEGORIA")
 public class Categoria implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	
