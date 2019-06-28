@@ -14,17 +14,19 @@ import org.springframework.stereotype.Service;
 import com.ilton.cursomc.domain.Categoria;
 import com.ilton.cursomc.repositories.CategoriaRepository;
 
+import javassist.tools.rmi.ObjectNotFoundException;
+
 @Service
 public class CategoriaService {
-	
-	//O serviço por sua vez vai acessar o objeto de acesso a dados
+
+	// O serviço por sua vez vai acessar o objeto de acesso a dados
 	@Autowired
 	private CategoriaRepository repo;
-	
-	//Operação capaz de buscar uma categoria por codigo
-	public Categoria buscar(Integer id) {
+
+	public Categoria find(Integer id) throws ObjectNotFoundException {
 		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
-	
+
 }
