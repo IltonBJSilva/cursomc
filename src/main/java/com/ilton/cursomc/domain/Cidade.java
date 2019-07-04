@@ -1,3 +1,9 @@
+/*
+Nome do autor: Ilton Batista da Silva Júnior
+Data de criação do arquivo: 4/07/2019
+Objetivo sucinto do programa: Cria uma classe de cidade
+Referência ao enunciado/origem do exercício: https://www.udemy.com/spring-boot-ionic
+*/
 package com.ilton.cursomc.domain;
 
 import java.io.Serializable;
@@ -9,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "CIDADES")

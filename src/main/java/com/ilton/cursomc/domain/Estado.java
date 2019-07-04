@@ -1,3 +1,10 @@
+/*
+Nome do autor: Ilton Batista da Silva Júnior
+Data de criação do arquivo: 07/04/2019
+Objetivo sucinto do programa: Cria uma classe de estado
+Referência ao enunciado/origem do exercício: https://www.udemy.com/spring-boot-ionic
+*/
+
 package com.ilton.cursomc.domain;
 
 import java.io.Serializable;
