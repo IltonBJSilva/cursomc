@@ -22,6 +22,8 @@ import com.ilton.cursomc.domain.Estado;
 import com.ilton.cursomc.domain.Produto;
 import com.ilton.cursomc.domain.enums.TipoCliente;
 import com.ilton.cursomc.repositories.CategoriaRepository;
+import com.ilton.cursomc.repositories.CidadeRepository;
+import com.ilton.cursomc.repositories.ClienteRepository;
 import com.ilton.cursomc.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -33,6 +35,16 @@ public class CursomcApplication implements CommandLineRunner{
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private CidadeRepository cidadeRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository EnderecoRepository;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
