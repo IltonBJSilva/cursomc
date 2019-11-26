@@ -34,13 +34,16 @@ public class Cliente implements Serializable{
 	@JsonManagedReference
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
-	
+
+
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	//Set e um conjunto e conjuntos não aceitam repetições
 	//Para mapear compo uma entidade fraca
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
+	
 	
 	public Cliente() {
 	
@@ -111,6 +114,13 @@ public class Cliente implements Serializable{
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	
 	
 	@Override
 	public int hashCode() {
@@ -142,8 +152,4 @@ public class Cliente implements Serializable{
 		return "Cliente [id=" + id + ", nome=" + nome + ", email=" + email + ", cpfOuCnpj=" + cpfOuCnpj + ", tipo="
 				+ tipo + ", enderecos=" + enderecos + ", telefones=" + telefones + "]";
 	}
-	
-	
-
-	
 }
