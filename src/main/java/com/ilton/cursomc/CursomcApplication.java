@@ -7,6 +7,7 @@ Referência ao enunciado/origem do exercício: https://www.udemy.com/spring-boot
 
 package com.ilton.cursomc;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,20 @@ import com.ilton.cursomc.domain.Cidade;
 import com.ilton.cursomc.domain.Cliente;
 import com.ilton.cursomc.domain.Endereco;
 import com.ilton.cursomc.domain.Estado;
+import com.ilton.cursomc.domain.Pagamento;
+import com.ilton.cursomc.domain.PagamentoComBoleto;
+import com.ilton.cursomc.domain.PagamentoComCartao;
+import com.ilton.cursomc.domain.Pedido;
 import com.ilton.cursomc.domain.Produto;
+import com.ilton.cursomc.domain.enums.EstadoPagamento;
 import com.ilton.cursomc.domain.enums.TipoCliente;
 import com.ilton.cursomc.repositories.CategoriaRepository;
 import com.ilton.cursomc.repositories.CidadeRepository;
 import com.ilton.cursomc.repositories.ClienteRepository;
 import com.ilton.cursomc.repositories.EnderecoRepository;
 import com.ilton.cursomc.repositories.EstadoRepository;
+import com.ilton.cursomc.repositories.PagamentoRepository;
+import com.ilton.cursomc.repositories.PedidoRepository;
 import com.ilton.cursomc.repositories.ProdutoRepository;
 
 
@@ -44,6 +52,10 @@ public class CursomcApplication implements CommandLineRunner {
 	private ClienteRepository clienteRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	@Autowired
+	private PagamentoRepository pagamentoRepository; 
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -93,6 +105,29 @@ public class CursomcApplication implements CommandLineRunner {
 		
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cli1, e2);
+
+		//Aqui se utiliza um polimorfismo para instanciar como PagmentoComCartao ou boleto.
+		Pagamento pagto1 = new PagamentoComCartao(null,EstadoPagamento.QUITADO,ped1,12);
+		Pagamento pagto2 = new PagamentoComBoleto(null,EstadoPagamento.PENDENTE,ped2,sdf.parse("20/10/2017 00:00"),null);
+		
+		ped1.setPagamento(pagto1);
+		ped2.setPagamento(pagto2);
+		
+		//Para saber quais pedidos e do cliente 1
+		cli1.getPedidos().addAll(Arrays.asList(ped1,ped2));
+	
+		//salvar na ordem certa
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
+		
+		
+		
+		
 	
 	}
 	

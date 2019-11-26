@@ -3,28 +3,35 @@ package com.ilton.cursomc.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+@Entity
 public class Pedido implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Date instante;
 	
-	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
-	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="endereco_id")
+	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
 
-	@ManyToOne
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	@JoinColumn(name="pagamento_id")
 	private Pagamento pagamento;
 	
@@ -32,13 +39,12 @@ public class Pedido implements Serializable{
 		
 	}
 
-	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega, Pagamento pagamento) {
+	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.cliente = cliente;
 		this.enderecoDeEntrega = enderecoDeEntrega;
-		this.pagamento = pagamento;
 	}
 
 	public Integer getId() {
