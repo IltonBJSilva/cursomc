@@ -1,5 +1,4 @@
 package com.ilton.cursomc.domain;
-
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -10,30 +9,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Endereco implements Serializable{
+public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	
 	private String logradouro;
 	private String numero;
 	private String complemento;
 	private String bairro;
 	private String cep;
 	
-	//O ManyToOne e relacionamento de muitos para um.
 	@ManyToOne
-	@JoinColumn(name="client_id")
+	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
 	@ManyToOne
 	@JoinColumn(name="cidade_id")
-	private Cidade cidades;
+	private Cidade cidade;
 	
 	public Endereco() {
-	
 	}
 
 	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
@@ -46,7 +42,7 @@ public class Endereco implements Serializable{
 		this.bairro = bairro;
 		this.cep = cep;
 		this.cliente = cliente;
-		this.cidades = cidade;
+		this.setCidade(cidade);
 	}
 
 	public Integer getId() {
@@ -104,13 +100,13 @@ public class Endereco implements Serializable{
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
-	public Cidade getCidades() {
-		return cidades;
+
+	public Cidade getCidade() {
+		return cidade;
 	}
 
-	public void setCidades(Cidade cidades) {
-		this.cidades = cidades;
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 
 	@Override
@@ -137,11 +133,7 @@ public class Endereco implements Serializable{
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Endereco [id=" + id + ", logradouro=" + logradouro + ", numero=" + numero + ", complemento="
-				+ complemento + ", bairro=" + bairro + ", cep=" + cep + ", cliente=" + cliente + "]";
-	}
-
+	
+	
+	
 }

@@ -16,18 +16,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "ESTADO")
 public class Estado implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String name;
+	private String nome;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="estado")
 	private List<Cidade> Cidade = new ArrayList<>();
 	
@@ -35,10 +36,10 @@ public class Estado implements Serializable{
 		
 	}
 
-	public Estado(Integer id, String name) {
+	public Estado(Integer id, String nome) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.nome = nome;
 	}
 
 	public Integer getId() {
@@ -49,12 +50,12 @@ public class Estado implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public List<Cidade> getCidade() {
@@ -92,7 +93,7 @@ public class Estado implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Estado [id=" + id + ", name=" + name + ", Cidade=" + Cidade + "]";
+		return "Estado [id=" + id + ", Nome=" + nome + ", Cidade=" + Cidade + "]";
 	}
 	
 	
