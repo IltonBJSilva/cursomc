@@ -33,7 +33,4 @@ public class CategoriaService {
 		obj.setId(null);
 		return repo.save(obj);
 	}
-
-
-
 }
