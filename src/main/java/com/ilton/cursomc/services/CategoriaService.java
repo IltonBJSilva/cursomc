@@ -9,10 +9,12 @@ package com.ilton.cursomc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.ilton.cursomc.domain.Categoria;
 import com.ilton.cursomc.repositories.CategoriaRepository;
+import com.ilton.cursomc.services.exceptions.DataIntegrityException;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -37,5 +39,18 @@ public class CategoriaService {
 	public Categoria update(Categoria obj) throws ObjectNotFoundException {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) throws ObjectNotFoundException{
+		find(id);
+		try {
+			
+			repo.deleteById(id);
+		
+		}catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não e possivel excluir uma categoria que possui produtos");
+
+		}
+		
 	}
 }
