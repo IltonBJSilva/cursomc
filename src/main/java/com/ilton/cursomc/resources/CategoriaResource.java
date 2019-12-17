@@ -34,7 +34,7 @@ public class CategoriaResource {
 	// Vai buscar por categoria/id no caso vai por id mostrando apenas as
 	// informações de tal produto
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) throws ObjectNotFoundException {
+	public ResponseEntity<Categoria> find(@PathVariable Integer id) throws ObjectNotFoundException {
 		Categoria obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
@@ -51,5 +51,12 @@ public class CategoriaResource {
 		//Ja gera o 201 que informa que foi criado passando como paramentro o uri
 		return ResponseEntity.created(uri).build();
 		
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) throws ObjectNotFoundException{
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 }

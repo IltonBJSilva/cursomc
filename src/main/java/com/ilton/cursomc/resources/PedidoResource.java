@@ -30,7 +30,7 @@ public class PedidoResource {
 	// Vai buscar por categoria/id no caso vai por id mostrando apenas as
 	// informações de tal produto
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) throws ObjectNotFoundException {
+	public ResponseEntity<Pedido> find(@PathVariable Integer id) throws ObjectNotFoundException {
 		Pedido obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
